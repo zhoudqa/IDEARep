@@ -36,11 +36,11 @@
         </property>
         <!-- 设置数据库连接池的初始化连接数 -->
         <property name="initialPoolSize">
-            <value>5</value>
+            <value>10</value>
         </property>
         <!-- 设置数据库连接池的连接最大空闲时间 -->
         <property name="maxIdleTime">
-            <value>20</value>
+            <value>60</value>
         </property>
         <!-- c3p0缓存Statement的数量数 -->
         <property name="maxStatements">
@@ -54,7 +54,8 @@
     </bean>
 
     <!-- hibernate 管理-->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <!-- 引用上面设置的数据源 -->
         <property name="dataSource">
             <ref bean="dataSource" />

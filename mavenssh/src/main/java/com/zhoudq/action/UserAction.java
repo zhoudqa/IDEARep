@@ -32,6 +32,7 @@ public class UserAction extends ActionSupport {
 
     public String login() {
         if(userService.login(user)) {
+            System.out.println("login successful");
             Map session = ActionContext.getContext().getSession();
             session.put("user", user);
             return SUCCESS;

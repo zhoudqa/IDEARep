@@ -3,6 +3,7 @@ package com.zhoudq.dao.impl;
 import com.zhoudq.dao.UserDao;
 import com.zhoudq.entity.User;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,15 +30,24 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean login(User user) {
-        Iterator<User> it;
-        String hsql="FROM User u where u.username=? and u.password=?";
-        System.out.println(hsql);
-        Query query = sessionFactory.getCurrentSession().createQuery(hsql);
-        query.setString(0, user.getUsername());
-        query.setString(1, user.getPassword());
+
+
+        Session s=sessionFactory.openSession();
+        s.beginTransaction();
+        String hsql="FROM User u ";
+
+        Query query = s.createQuery(hsql);
+        //query.setString(0, user.getUsername());
+        //query.setString(1, user.getPassword());
         System.out.println(user.getUsername());
-        it=query.iterate();
-        if(it.hasNext()) {
+        List<User> gets=query.list();
+        for(User user1:gets){
+            System.out.println("username:"+user1.getUsername()+" email:"+user1.getEmail()+" password:"+user1.getPassword());
+        }
+        s.getTransaction().commit();
+        s.close();
+        sessionFactory.close();
+        if(gets.size()>0) {
             System.out.println("true");
             return true;
         } else {
