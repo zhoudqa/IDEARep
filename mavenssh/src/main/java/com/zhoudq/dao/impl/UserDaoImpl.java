@@ -20,7 +20,7 @@ import java.util.List;
 //出现Exception异常回滚
 @Repository("userDao") //进行注入
 public class UserDaoImpl implements UserDao {
-    @Resource(name="sessionFactory")
+    @Resource(name="sf")
     private SessionFactory sessionFactory;
 
     @Override
@@ -32,22 +32,15 @@ public class UserDaoImpl implements UserDao {
     public boolean login(User user) {
 
 
-        Session s=sessionFactory.openSession();
-        s.beginTransaction();
-        String hsql="FROM User u ";
-
-        Query query = s.createQuery(hsql);
-        //query.setString(0, user.getUsername());
-        //query.setString(1, user.getPassword());
+        Iterator<User> it;
+        String hsql="FROM User u where u.username=? and u.password=?";
+        System.out.println(hsql);
+        Query query = sessionFactory.getCurrentSession().createQuery(hsql);
+        query.setString(0, user.getUsername());
+        query.setString(1, user.getPassword());
         System.out.println(user.getUsername());
-        List<User> gets=query.list();
-        for(User user1:gets){
-            System.out.println("username:"+user1.getUsername()+" email:"+user1.getEmail()+" password:"+user1.getPassword());
-        }
-        s.getTransaction().commit();
-        s.close();
-        sessionFactory.close();
-        if(gets.size()>0) {
+        it=query.iterate();
+        if(it.hasNext()) {
             System.out.println("true");
             return true;
         } else {
@@ -56,7 +49,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    @Override
+        @Override
     public List getUser() {
         return sessionFactory.getCurrentSession().createQuery("FROM User").list();
     }
