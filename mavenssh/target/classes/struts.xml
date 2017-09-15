@@ -8,12 +8,22 @@
     <constant name="struts.devMode" value="false"/>
     <constant name="struts.objectFactory" value="spring" />
 
-    <package name="user" namespace="/" extends="struts-default">
+    <package name="default" namespace="/" extends="struts-default">
 
-        <action name="user_*" class="userAction" method="{1}">
+        <action name="login" class="userAction" method="login">
             <result name="success">/success.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+
+        <action name="register" class="userAction" method="register">
+            <result name="success">/login.jsp</result>
+            <result name="error">/register.jsp?msg=fail</result>
+        </action>
+
+        <action name="checkName" class="userAction" method="validateName">
+
+        </action>
+
 
     </package>
 </struts>

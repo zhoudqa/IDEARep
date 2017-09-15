@@ -16,7 +16,11 @@ public interface UserService {
 
     public User getUserById(int id);
 
+    public boolean getUserByName(String username);
+
     public boolean updateUser(User user);
 
     public boolean deleteUser(int id);
+
+    public void register(User user);
 }

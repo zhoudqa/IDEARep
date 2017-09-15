@@ -45,4 +45,8 @@ public interface UserDao {
      */
     public void delete(int id);
 
+    public void register(User user);
+
+
+    public boolean getUserByName(String username);
 }

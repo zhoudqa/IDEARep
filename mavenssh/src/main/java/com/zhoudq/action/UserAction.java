@@ -4,15 +4,16 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhoudq.entity.User;
 import com.zhoudq.service.UserService;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
-/**
- * Created by kinthon on 17-6-25.
- */
 
 @Controller("userAction")
 @Scope("prototype")
@@ -40,5 +41,30 @@ public class UserAction extends ActionSupport {
             return ERROR;
         }
     }
+
+    public String register(){
+        String res="error";
+        try{
+
+            userService.register(user);
+            System.out.println("register successful");
+            res="success";
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return res;
+        }
+    }
+    public void validateName() throws IOException{
+        System.out.println("validate fuc");
+        String username=ServletActionContext.getRequest().getParameter("username");
+        System.out.println("username:"+username);
+        boolean exist=userService.getUserByName(username);
+        HttpServletResponse response= ServletActionContext.getResponse();
+        System.out.println("exist:"+exist);
+        response.getWriter().print(exist);
+    }
+
+
 
 }

@@ -9,6 +9,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private boolean isAdmin;
 
     @Id
     @GeneratedValue
@@ -47,9 +48,20 @@ public class User {
         return password;
     }
 
+    @Basic
+    @Column(name="admin")
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -74,4 +86,6 @@ public class User {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
+
+
 }

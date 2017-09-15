@@ -33,11 +33,9 @@ public class UserDaoImpl implements UserDao {
 
         Iterator<User> it;
         String hsql="FROM User u where u.username=? and u.password=?";
-        System.out.println(hsql);
         Query query = sessionFactory.getCurrentSession().createQuery(hsql);
         query.setString(0, user.getUsername());
         query.setString(1, user.getPassword());
-        System.out.println(user.getUsername());
         it=query.iterate();
         if(it.hasNext()) {
             System.out.println("true");
@@ -68,5 +66,27 @@ public class UserDaoImpl implements UserDao {
         sessionFactory.getCurrentSession().delete(
                 sessionFactory.getCurrentSession().get(User.class, id)
         );
+    }
+
+    @Override
+    public void register(User user) {
+        sessionFactory.getCurrentSession().save(user);
+
+
+
+    }
+
+    @Override
+    public boolean getUserByName(String username) {
+        Iterator<User> it;
+        String hsql="FROM User u where u.username=?";
+        Query query = sessionFactory.getCurrentSession().createQuery(hsql);
+        query.setString(0, username);
+        it=query.iterate();
+        if(it.hasNext()){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

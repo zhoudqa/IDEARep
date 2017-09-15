@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean getUserByName(String username) {
+        return this.userDao.getUserByName(username);
+    }
+
+    @Override
     public boolean updateUser(User user) {
         this.userDao.update(user);
         return true;
@@ -51,5 +56,10 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(int id) {
         this.userDao.delete(id);
         return true;
+    }
+
+    @Override
+    public void register(User user) {
+        this.userDao.register(user);
     }
 }
