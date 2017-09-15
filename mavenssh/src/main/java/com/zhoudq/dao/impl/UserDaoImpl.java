@@ -3,7 +3,6 @@ package com.zhoudq.dao.impl;
 import com.zhoudq.dao.UserDao;
 import com.zhoudq.entity.User;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +19,7 @@ import java.util.List;
 //出现Exception异常回滚
 @Repository("userDao") //进行注入
 public class UserDaoImpl implements UserDao {
-    @Resource(name="sf")
+    @Resource(name= "sessionFactory")
     private SessionFactory sessionFactory;
 
     @Override

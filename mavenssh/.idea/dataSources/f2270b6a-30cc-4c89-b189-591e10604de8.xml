@@ -15,32 +15,53 @@
     <schema id="9" parent="1" name="sys"/>
     <schema id="10" parent="1" name="test"/>
     <schema id="11" parent="1" name="zhoudq"/>
-    <table id="12" parent="2" name="user"/>
-    <column id="13" parent="12" name="id">
+    <table id="12" parent="2" name="User"/>
+    <table id="13" parent="2" name="user"/>
+    <column id="14" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="12" name="email">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="16" parent="12" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="17" parent="12" name="username">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="18" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id
+id
+id
+id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="19" parent="13" name="id">
       <Position>1</Position>
       <DataType>int(4)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="14" parent="12" name="name">
+    <column id="20" parent="13" name="username">
       <Position>2</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="12" name="email">
+    <column id="21" parent="13" name="email">
       <Position>3</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="16" parent="12" name="password">
+    <column id="22" parent="13" name="password">
       <Position>4</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="17" parent="12" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
   </database-model>
 </dataSource>

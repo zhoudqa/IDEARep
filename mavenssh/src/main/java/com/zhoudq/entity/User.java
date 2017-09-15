@@ -1,10 +1,8 @@
 package com.zhoudq.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Table(name="user")
 @Entity
 public class User {
     private int id;
@@ -13,6 +11,7 @@ public class User {
     private String password;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public int getId() {
         return id;
